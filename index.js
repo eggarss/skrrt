@@ -1,12 +1,16 @@
 const Discord = require("discord.js")
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 const fetch = require("node-fetch");
-const PORT = process.env.PORT || 3000;
+const host = '0.0.0.0';
+const port = process.env.PORT || 3000;
 
-client.login(process.env.TOKEN)
+client.login(process.env.TOKEN);
 
+client.on(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
 
-client.on("ready", () => {
+client.on("ready", ()=> {
   console.log(`Logged in as ${client.user.tag}!`)
 })
 
