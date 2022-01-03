@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 const fetch = require("node-fetch");
-require("dotenv").config();
+const PORT = process.env.PORT || 3000;
 
 client.login(process.env.TOKEN)
 
