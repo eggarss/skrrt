@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ."
   },
+  
   "keywords": [],
   "author": "",
   "license": "MIT",
@@ -22,8 +23,11 @@
     "type": "git",
     "url": "git+https://github.com/eggarss/skrrt.git"
   },
+  "engines": { "node": "16.13.1" },
   "bugs": {
     "url": "https://github.com/eggarss/skrrt/issues"
   },
   "homepage": "https://github.com/eggarss/skrrt#readme"
+  
 }
+
