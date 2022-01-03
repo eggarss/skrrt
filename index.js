@@ -1,8 +1,7 @@
 const Discord = require("discord.js")
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 const fetch = require("node-fetch");
-const host = '0.0.0.0';
-const port = process.env.PORT || 3000;
+process.env.PORT || 3000;
 
 client.login(process.env.TOKEN);
 
