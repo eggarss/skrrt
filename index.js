@@ -58,6 +58,23 @@ client.on("messageCreate", async (msg) => {
   try{
     let query = msg.content.split(" ");
     if(query[0] == ".gif") {
+      let url = `https://api.tenor.com/v1/search?q=${query[1]}&key=${process.env.TENORKEY}"`;
+      let response = await fetch(url);
+      let data = await response.json();
+      let random = Math.floor(Math.random() * data.results.length);
+      msg.channel.send(data.results[random].url);
+    }}
+    catch(err){
+        console.log(`Error in the main Functionality! ${err}`);
+        msg.react('❌');
+    }
+});
+
+
+/*client.on("messageCreate", async (msg) => {
+  try{
+    let query = msg.content.split(" ");
+    if(query[0] == ".gif") {
        let url = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHYKEY}&q=${query[1]}`; 
       let response = await fetch(url);
       let jsn = await response.json();
@@ -68,7 +85,7 @@ client.on("messageCreate", async (msg) => {
         console.log(`Neatrada tadu gifu! ${err}`);
         msg.react('❌');
     }
-});
+});*/
 //GIF
 
 
