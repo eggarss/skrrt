@@ -15,6 +15,7 @@ app.get('/', function(request, response) {
 }).listen(app.get('port'), function() {
     console.log('App is running, server is listening on port ', app.get('port'));
 });
+//For avoidong Heroku $PORT error
 
 client.login(process.env.TOKEN);
 
@@ -23,25 +24,33 @@ client.on("ready", ()=> {
 })
 
 client.on("messageCreate", msg => {
-  if (msg.content == "gangg"){
-    msg.reply("shit")
+  if (msg.content == "gang"){
+    msg.channel.send("shit")
   }
 })
 
-client.on("messageCreate", async (msg) => {
-  try{
-    let query = msg.content.split(" ");
-    if(query[0] == ".gif") {
-      let url = `https://api.tenor.com/v1/search?q=${query[1]}&key=${process.env.TENORKEY}"`;
-      let response = await fetch(url);
-      let data = await response.json();
-      let random = Math.floor(Math.random() * data.results.length);
-      msg.channel.send(data.results[random].url);
-    }}
-    catch(err){
-        console.log(`Error in the main Functionality! ${err}`);
+client.on("message", gotMessage);
+
+async function gotMessage(msg){
+  let tokens = msg.content.split(" ");
+
+  if (tokens[0] === ".niga"){
+    const index = Math.floor(Math.random() * replies.length);
+    msg.channel.send(replies[index]);    
+  } else if (tokens[0] == ".gif") {
+    let keywords = "meme";
+
+    if (tokens.length > 1) {
+      keywords = tokens.slice(1, tokens.length).join(" ");
     }
-});
+    let url = `https://api.tenor.com/v1/search?q=${keywords}&key=${process.env.TENORKEY}"`;
+    let response = await fetch(url);
+    let data = await response.json();
+    const index = Math.floor(Math.random() * data.results.length);
+    msg.channel.send(data.results[index].url);
+  }
+};
+
 
 
 
