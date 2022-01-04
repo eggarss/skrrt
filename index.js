@@ -65,7 +65,7 @@ client.on("messageCreate", async (msg) => {
       msg.channel.send(jsn.data[random].url);
     }}
     catch(err){
-        console.log(`Error in the main Functionality! ${err}`);
+        console.log(`Neatrada tadu gifu! ${err}`);
         msg.react('❌');
     }
 });
