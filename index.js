@@ -66,7 +66,7 @@ client.on("messageCreate", async (msg) => {
     }}
     catch(err){
         console.log(`Neatrada tadu gifu! ${err}`);
-        //msg.react('❌');
+        msg.react('❌');
     }
 });
 //GIF
