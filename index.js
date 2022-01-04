@@ -34,10 +34,7 @@ client.on("message", gotMessage);
 async function gotMessage(msg){
   let tokens = msg.content.split(" ");
 
-  if (tokens[0] === ".niga"){
-    const index = Math.floor(Math.random() * replies.length);
-    msg.channel.send(replies[index]);    
-  } else if (tokens[0] == ".gif") {
+  if (tokens[0] == ".gif") {
     let keywords = "meme";
 
     if (tokens.length > 1) {
@@ -48,6 +45,8 @@ async function gotMessage(msg){
     let data = await response.json();
     const index = Math.floor(Math.random() * data.results.length);
     msg.channel.send(data.results[index].url);
+
+    
   }
 };
 
