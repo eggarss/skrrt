@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 process.env.PORT || 3000;
 
 var express = require('express');
-var app     = express();
+var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -21,7 +21,10 @@ client.login(process.env.TOKEN);
 
 client.on("ready", ()=> {
   console.log(`Logged in as ${client.user.tag}!`)
+  client.user.setActivity("Dick", {type: "PLAYING"})
 })
+
+
 
 client.on("messageCreate", msg => {
   if (msg.content == "gang"){
@@ -29,26 +32,44 @@ client.on("messageCreate", msg => {
   }
 })
 
-client.on("message", gotMessage);
+//SAY
 
-async function gotMessage(msg){
-  let tokens = msg.content.split(" ");
 
-  if (tokens[0] == ".gif") {
-    let keywords = "meme";
+//SAY
 
-    if (tokens.length > 1) {
-      keywords = tokens.slice(1, tokens.length).join(" ");
-    }
-    let url = `https://api.tenor.com/v1/search?q=${keywords}&key=${process.env.TENORKEY}"`;
-    let response = await fetch(url);
-    let data = await response.json();
-    const index = Math.floor(Math.random() * data.results.length);
-    msg.channel.send(data.results[index].url);
-
-    
+//CLEAR
+/*
+client.on("messageCreate", msg => {
+  let args = msg.content.split(" ");
+  if (args[0] == ".clear"){
+    if(!msg.member.hasPermission("MANAGE_MESSAGES")) return message.reply("nabags");
+    if(args[0]) return message.channel.send("losis");
+    msg.channel.bulkDelete(args[0]).then(() =>{
+      msg.channel.send(`Cleare ${args[0]} messages`).then(msg1 => msg1.delete(5000));
+    })
   }
-};
+})
+*/
+//CLEAR
+
+//GIF
+
+client.on("messageCreate", async (msg) => {
+  try{
+    let query = msg.content.split(" ");
+    if(query[0] == ".gif") {
+       let url = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHYKEY}&q=${query[1]}`; 
+      let response = await fetch(url);
+      let jsn = await response.json();
+      let random = Math.floor(Math.random() * jsn.data.length);
+      msg.channel.send(jsn.data[random].url);
+    }}
+    catch(err){
+        console.log(`Error in the main Functionality! ${err}`);
+        msg.react('❌');
+    }
+});
+//GIF
 
 
 
