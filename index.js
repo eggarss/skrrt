@@ -2,6 +2,7 @@ const Discord = require("discord.js")
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 const fetch = require("node-fetch");
 process.env.PORT || 3000;
+let prefix = '.';
 
 var express = require('express');
 var app = express();
@@ -38,19 +39,59 @@ client.on("messageCreate", msg => {
 //SAY
 
 //CLEAR
-/*
-client.on("messageCreate", msg => {
-  let args = msg.content.split(" ");
-  if (args[0] == ".clear"){
-    if(!msg.member.hasPermission("MANAGE_MESSAGES")) return message.reply("nabags");
-    if(args[0]) return message.channel.send("losis");
-    msg.channel.bulkDelete(args[0]).then(() =>{
-      msg.channel.send(`Cleare ${args[0]} messages`).then(msg1 => msg1.delete(5000));
-    })
-  }
-})
-*/
+
+client.on("messageCreate", async (msg) => {
+  try{
+
+    if(!msg.content.startsWith(prefix) || msg.author.bot) return;
+
+    const args = msg.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    if(command === 'clear') {
+      
+      if(!args[0]) return msg.reply("Enter amount of messages you want to clear");
+      if(isNaN(args[0])) return msg.reply("Please enter a real number");
+
+      msg.channel.messages.fetch({limit: args[0]}).then(msg =>{
+            msg.channel.bulkDelete(messages);
+          
+      })
+    }}
+    catch(err){
+        console.log(`Error in the main Functionality! ${err}`);
+        msg.react('❌');
+    }
+});
+
+
 //CLEAR
+
+//8BALL
+
+client.on("messageCreate", async (msg) => {
+  try{
+
+    if(!msg.content.startsWith(prefix) || msg.author.bot) return;
+
+    const args = msg.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    function doMagic8BallVoodoo() {
+    var rand = ['kā es to redzu, jā.','vēlāk jautā vēlreiz.','labāk tagad nestāsti.','tagad nevar paredzēt.','koncentrējies un jautā vēlreiz.','ar to nerēķinies.','tas ir skaidrs.','tā noteikti ir.','visticamāk.','mana atbilde ir nē.','mani avoti saka nē.','perspektīva nav tik laba.','perspektīva laba.','atbilde miglaina, mēģini vēlreiz.','zīmes norāda uz jā.','ļoti apšaubāmi.','bez šaubām.','jā.','jā - noteikti.','vari paļauties uz to.'];
+
+    return rand[Math.floor(Math.random()*rand.length)];
+    }
+    if(command === '8ball'){
+      msg.reply(doMagic8BallVoodoo());
+    }}
+     catch(err){
+        console.log(`Error in the main Functionality! ${err}`);
+        msg.react('❌');
+    }
+});
+//8BALL
+
 
 //GIF
 
@@ -70,7 +111,7 @@ client.on("messageCreate", async (msg) => {
     }
 });
 
-
+//GIPHY
 /*client.on("messageCreate", async (msg) => {
   try{
     let query = msg.content.split(" ");
