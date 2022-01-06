@@ -48,7 +48,7 @@ client.on("messageCreate", msg => {
         kkk = query.slice(1, query.length).join(" ");
       }
 
-      if(kkk) return msg.reply("Neatstāj tukšu. :wink: ");
+       if(!query[1]) return msg.reply("A kas japareģo? :thinking: Nakamreiz ievadi ko pareģot. :clown:");
 
       const embedPoll = new Discord.MessageEmbed()
       .setTitle('Jauns Poll!')
@@ -59,6 +59,10 @@ client.on("messageCreate", msg => {
         m.react('👍');
         m.react('👎');
       })
+
+
+
+      
   
     }}
      catch(err){
@@ -127,11 +131,11 @@ client.on("messageCreate", async (msg) => {
   try{
     let query = msg.content.split(" ");
     if(query[0] == ".gif") {
-      let kkk = "dark meme";
+      let meme = "dark meme";
       if(query.length > 1){
-        kkk = query.slice(1, query.length).join(" ");
+        meme = query.slice(1, query.length).join(" ");
       }
-      let url = `https://api.tenor.com/v1/search?q=${kkk}&key=${process.env.TENORKEY}"`;
+      let url = `https://api.tenor.com/v1/search?q=${meme}&key=${process.env.TENORKEY}"`;
       let response = await fetch(url);
       let data = await response.json();
       let random = Math.floor(Math.random() * data.results.length);
