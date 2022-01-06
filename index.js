@@ -50,7 +50,7 @@ client.on("messageCreate", msg => {
        if(!query[1]) return msg.reply("Par ko balsot? :thinking:");
 
       const embedPoll = new Discord.MessageEmbed()
-      .setTitle(`${message.author}Jauns Poll!`)
+      .setTitle('Jauns Poll!')
       .setDescription(`**Question:** ${kkk}`)
       .setColor('RED')
       const msgEmbed = msg.channel.send({ embeds: [embedPoll] })
