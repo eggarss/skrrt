@@ -47,7 +47,6 @@ client.on("messageCreate", msg => {
       if(query.length > 1){
         kkk = query.slice(1, query.length).join(" ");
       }
-
        if(!query[1]) return msg.reply("Par ko balsot? :thinking:");
 
       const embedPoll = new Discord.MessageEmbed()
@@ -58,14 +57,9 @@ client.on("messageCreate", msg => {
       .then(m => {
         m.react('👍');
         m.react('👎');
-      })
-
-
-
-      
-  
+      });
     }}
-     catch(err){
+        catch(err){
         console.log(`Error in the main Functionality! ${err}`);
         msg.react('❌');
     }
