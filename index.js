@@ -51,7 +51,7 @@ client.on("messageCreate", msg => {
 
       const embedPoll = new Discord.MessageEmbed()
       .setTitle('Jauns Poll!')
-      .setDescription(kkk)
+      .setDescription('Question:')
       .setColor('RED')
       const msgEmbed = msg.channel.send({ embeds: [embedPoll] })
       .then(m => {
