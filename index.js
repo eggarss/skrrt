@@ -33,13 +33,43 @@ client.on("messageCreate", msg => {
   }
 })
 
-//SAY
+//POLL
 
+  client.on("messageCreate", async (msg) => {
+  try{
+    if (msg.author.bot || msg.channel.type === "dm") return;
+    let query = msg.content.split(" ");
 
-//SAY
+    if(query[0] === '.poll'){
+      
+      
+      let kkk = "Ievadi ziņu nakamreiz DAVNI";
+      if(query.length > 1){
+        kkk = query.slice(1, query.length).join(" ");
+      }
+
+      if(kkk) return msg.reply("Neatstāj tukšu. :wink: ");
+
+      const embedPoll = new Discord.MessageEmbed()
+      .setTitle('Jauns Poll!')
+      .setDescription(kkk)
+      .setColor('RED')
+      const msgEmbed = msg.channel.send({ embeds: [embedPoll] })
+      .then(m => {
+        m.react('👍');
+        m.react('👎');
+      })
+  
+    }}
+     catch(err){
+        console.log(`Error in the main Functionality! ${err}`);
+        msg.react('❌');
+    }
+});
+
+//POLL
 
 //CLEAR
-
 client.on("messageCreate", async (msg) => {
   try{
 
@@ -63,12 +93,9 @@ client.on("messageCreate", async (msg) => {
         msg.react('❌');
     }
 });
-
-
 //CLEAR
 
 //8BALL
-
 client.on("messageCreate", async (msg) => {
   try{
 
@@ -92,14 +119,16 @@ client.on("messageCreate", async (msg) => {
 });
 //8BALL
 
-
 //GIF
-
 client.on("messageCreate", async (msg) => {
   try{
     let query = msg.content.split(" ");
     if(query[0] == ".gif") {
-      let url = `https://api.tenor.com/v1/search?q=${query[1]}&key=${process.env.TENORKEY}"`;
+      let kkk = "dark meme";
+      if(query.length > 1){
+        kkk = query.slice(1, query.length).join(" ");
+      }
+      let url = `https://api.tenor.com/v1/search?q=${kkk}&key=${process.env.TENORKEY}"`;
       let response = await fetch(url);
       let data = await response.json();
       let random = Math.floor(Math.random() * data.results.length);
@@ -110,6 +139,7 @@ client.on("messageCreate", async (msg) => {
         msg.react('❌');
     }
 });
+
 
 //GIPHY
 /*client.on("messageCreate", async (msg) => {
@@ -127,6 +157,7 @@ client.on("messageCreate", async (msg) => {
         msg.react('❌');
     }
 });*/
+//GIPHY
 //GIF
 
 
