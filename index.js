@@ -48,7 +48,7 @@ client.on("messageCreate", msg => {
         kkk = query.slice(1, query.length).join(" ");
       }
 
-       if(!query[1]) return msg.reply("A kas japareģo? :thinking: Nakamreiz ievadi ko pareģot. :clown:");
+       if(!query[1]) return msg.reply("Par ko balsot? :thinking:");
 
       const embedPoll = new Discord.MessageEmbed()
       .setTitle('Jauns Poll!')
