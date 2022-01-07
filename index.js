@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
+const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"], })
 const fetch = require("node-fetch");
 process.env.PORT || 3000;
 let prefix = '.';
@@ -51,13 +51,28 @@ client.on("messageCreate", msg => {
 
       const embedPoll = new Discord.MessageEmbed()
       .setTitle(`${msg.author.username}'s Poll!`)
-      .setDescription(`**Question:** ${kkk}`)
+      .setDescription(`**Question:** ${kkk} \n **Voting time:** 30sec`)
+      .setTimestamp()
       .setColor('RED')
-      const msgEmbed = msg.channel.send({ embeds: [embedPoll] })
-      .then(m => {
-        m.react('👍');
-        m.react('👎');
-      });
+      await msg.channel.send({ embeds: [embedPoll] })
+      msg.react('👍');
+      msg.react('👎');
+
+      const filter = (reaction, user) => {
+	    return reaction.emoji.name === '👍' || reaction.emoji.name === '👎';
+      };
+      const results = await msg.awaitReactions({ filter, time:30000 })
+
+      const resultsEmbed = new Discord.MessageEmbed()
+      .setTitle(`${msg.author.username}'s Poll Results!`)
+      .setDescription(`**Results for the question:** ${kkk}`)
+      .addField("👍:",`${results.get("👍").count-1} Votes`)
+      .addField('👎:',`${results.get("👎").count-1} Votes`)
+      //.then(collected => console.log(`Collected ${collected.size} reactions`))
+      //.catch(console.error);
+
+    
+    msg.channel.send({ embeds: [resultsEmbed] });
     }}
         catch(err){
         console.log(`Error in the main Functionality! ${err}`);
