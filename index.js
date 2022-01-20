@@ -1,6 +1,7 @@
 const Discord = require("discord.js")
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"], })
 const fetch = require("node-fetch");
+const pagination = require('discord.js-pagination');
 process.env.PORT || 3000;
 let prefix = '.';
 
@@ -22,7 +23,7 @@ client.login(process.env.TOKEN);
 
 client.on("ready", ()=> {
   console.log(`Logged in as ${client.user.tag}!`)
-  client.user.setActivity("Dick", {type: "PLAYING"})
+  client.user.setActivity("with Dick", {type: "PLAYING"})
 })
 
 
@@ -54,17 +55,17 @@ client.on("messageCreate", msg => {
       .setDescription(`**Question:** ${kkk} \n **Voting time:** 30sec`)
       .setTimestamp()
       .setColor('RED')
-      await msg.channel.send({ embeds: [embedPoll] })
-      msg.react('👍');
-      msg.react('👎');
+      const qemb = await msg.channel.send({ embeds: [embedPoll] })
+      qemb.react('👍');
+      qemb.react('👎');
 
       const filter = (reaction, user) => {
 	    return reaction.emoji.name === '👍' || reaction.emoji.name === '👎';
       };
-      const results = await msg.awaitReactions({ filter, time:30000 })
+      const results = await qemb.awaitReactions({ filter, time:30000 })
 
       const resultsEmbed = new Discord.MessageEmbed()
-      .setTitle(`${msg.author.username}'s Poll Results!`)
+      .setTitle(`${qemb.author.username}'s Poll Results!`)
       .setDescription(`**Results for the question:** ${kkk}`)
       .addField("👍:",`${results.get("👍").count-1} Votes`)
       .addField('👎:',`${results.get("👎").count-1} Votes`)
