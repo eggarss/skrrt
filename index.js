@@ -136,6 +136,42 @@ client.on("messageCreate", async (msg) => {
 });
 //8BALL
 
+//RETARD
+client.on("messageCreate", async (msg) => {
+  try{
+
+    if(!msg.content.startsWith(prefix) || msg.author.bot) return;
+    const args = msg.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    function retard() {
+    var rand = ['https://media1.tenor.com/images/33f03dc04994af47305189d5da00f13c/tenor.gif?itemid=14638153','https://media1.tenor.com/images/fe3788c68a25911c139c027034e2f88a/tenor.gif?itemid=13936491','https://media.giphy.com/media/h8HmN0UcEKR0xWnv3R/giphy.gif','https://media.giphy.com/media/LkxWvkmpy2uznXth6A/giphy.gif'];
+
+    
+
+    return rand[Math.floor(Math.random()*rand.length)];
+    }
+    
+    if(command === 'dumb'){
+
+       const embedgif = new Discord.MessageEmbed()
+      .setTitle("XDDDDDDDDDDDDDDDDDDDDDDDD")
+      .setColor('RANDOM')
+      .setImage(retard())
+      const qemb = await msg.channel.send({ embeds: [embedgif] })
+
+
+
+      //msg.channel.send(retard());
+    }}
+     catch(err){
+        console.log(`Error in the main Functionality! ${err}`);
+        msg.react('❌');
+    }
+});
+//RETARD
+
+
 //GIF
 client.on("messageCreate", async (msg) => {
   try{
