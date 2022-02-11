@@ -183,9 +183,16 @@ client.on("messageCreate", async (msg) => {
       }
       let url = `https://api.tenor.com/v1/search?q=${meme}&key=${process.env.TENORKEY}"`;
       let response = await fetch(url);
-      let data = await response.json();
-      let random = Math.floor(Math.random() * data.results.length);
-      msg.channel.send(data.results[random].url);
+      let { results } = await response.json();
+      let random = results[Math.floor(Math.random() * results.length)];
+      let { gif } = random.media[0]; //parverš linku par media kas ļauj ievietot embeda
+      //msg.channel.send(data.results[random].url);
+
+      const gifcmd = new Discord.MessageEmbed()
+      .setColor('RANDOM')
+      .setImage(gif.url)
+      msg.channel.send({ embeds: [gifcmd] })
+
     }}
     catch(err){
         console.log(`Error in the main Functionality! ${err}`);
