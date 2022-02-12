@@ -16,7 +16,8 @@
     "discord.js-poll": "^1.0.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.2",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "snekfetch": "^4.0.4"
   },
   "devDependencies": {
     "node": "^16.13.1"

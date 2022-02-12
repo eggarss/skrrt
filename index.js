@@ -2,6 +2,7 @@ const Discord = require("discord.js")
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"], })
 const fetch = require("node-fetch");
 const pagination = require('discord.js-pagination');
+const snekfetch = require('snekfetch');
 process.env.PORT || 3000;
 let prefix = '.';
 
@@ -200,7 +201,6 @@ client.on("messageCreate", async (msg) => {
     }
 });
 
-
 //GIPHY
 /*client.on("messageCreate", async (msg) => {
   try{
@@ -219,6 +219,49 @@ client.on("messageCreate", async (msg) => {
 });*/
 //GIPHY
 //GIF
+
+//NSFW REDDIT
+
+client.on("messageCreate", async (msg) => {
+  try{
+    
+    if(!msg.content.startsWith(prefix) || msg.author.bot) return;
+    const args = msg.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    function girls() {
+    var rand = ['RealGirls','NSFW','BoltedOnTits','HighResNSFW','randomsexiness', 'ass', 'bigasses', 'SpreadEm', 'booty', 'thick', 'ShinyPorn', 'seethru', 'gonewild', 'Blonde', 'redheads','shorthairchicks','HappyEmbarrassedGirls','palegirls','SexyFrex','flexi','LegalTeens','theratio','milf','Hotchickswithtattoos','piercedtits','PiercedNSFW','pussy','rearpussy','HairyPussy','simps','selfshots','SexyGirlsInBoots','boobs','Boobies'];
+
+    return rand[Math.floor(Math.random()*rand.length)];
+    }
+
+    const { body } = await snekfetch
+            .get(`https://www.reddit.com/r/${girls()}.json?sort=top&t=week`)
+            .query({ limit: 800 });
+        const allowed = msg.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
+        if (!allowed.length) return msg.channel.send('Restricted content!');
+        const randomnumber = Math.floor(Math.random() * allowed.length)
+        if(command === 'nsfw'){
+        const embed = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle(allowed[randomnumber].data.title)
+        .setDescription("Posted by: " + allowed[randomnumber].data.author)
+        .setImage(allowed[randomnumber].data.url)
+        .addField("Other info:", "Up votes: " + allowed[randomnumber].data.ups + " / Comments: " + allowed[randomnumber].data.num_comments)
+        .setFooter({text:`NSFW provided by r/${girls()}`})
+
+        msg.guild.channels.cache.get("646362943063326720").send({ embeds: [embed] });
+        }
+        else {
+           msg.channel.send("NSFW CONTENT ONLY AVAILABLE IN ")
+        }
+
+    } catch (err) {
+        return console.log(err);
+    }
+});
+
+//NSFW REDDIT
 
 
 
