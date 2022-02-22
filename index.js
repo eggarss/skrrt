@@ -35,6 +35,11 @@ client.on("messageCreate", msg => {
   }
 })
 
+client.on("messageCreate", msg => {
+  if (msg.content == "3.0"){
+    msg.channel.send("BEEEEEEEEEEEEEEEEEEEEEEEENJA")
+  }
+})
 //POLL
 
   client.on("messageCreate", async (msg) => {
