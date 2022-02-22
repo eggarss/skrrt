@@ -234,14 +234,14 @@ client.on("messageCreate", async (msg) => {
 
     return rand[Math.floor(Math.random()*rand.length)];
     }
-
+    if(command === 'nsfw'){
     const { body } = await snekfetch
             .get(`https://www.reddit.com/r/${girls()}.json?sort=top&t=week`)
             .query({ limit: 800 });
         const allowed = msg.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
         if (!allowed.length) return msg.channel.send('Restricted content!');
         const randomnumber = Math.floor(Math.random() * allowed.length)
-        if(command === 'nsfw'){
+       
         //const embed = new Discord.MessageEmbed()
         //.setColor("RANDOM")
         //.setTitle(allowed[randomnumber].data.title)
@@ -251,9 +251,6 @@ client.on("messageCreate", async (msg) => {
         //.setFooter({text:`NSFW provided by r/${girls()}`})
 
         msg.guild.channels.cache.get("646362943063326720").send(/*{ embeds: [embed] }*/allowed[randomnumber].data.url);
-        }
-        else {
-           msg.channel.send("NSFW CONTENT ONLY AVAILABLE IN ")
         }
 
     } catch (err) {
