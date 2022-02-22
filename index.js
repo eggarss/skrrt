@@ -35,11 +35,6 @@ client.on("messageCreate", msg => {
   }
 })
 
-client.on("messageCreate", msg => {
-  if (msg.content == "3.0"){
-    msg.channel.send("BEEEEEEEEEEEEEEEEEEEEEEEENJA")
-  }
-})
 //POLL
 
   client.on("messageCreate", async (msg) => {
@@ -88,6 +83,8 @@ client.on("messageCreate", msg => {
 });
 
 //POLL
+
+
 
 //CLEAR
 client.on("messageCreate", async (msg) => {
@@ -176,6 +173,33 @@ client.on("messageCreate", async (msg) => {
     }
 });
 //RETARD
+
+//SAY
+
+client.on("messageCreate", async (msg) => {
+  try{
+    if(!msg.content.startsWith(prefix) || msg.author.bot) return;
+    const args = msg.content.slice(prefix.length).split(/ +/);
+     const command = args.shift().toLowerCase();
+    
+    if(command === 'say')
+ {
+  let MSG = msg.content.split(" ");
+  let Query = MSG.slice(1).join("+");
+  let QueryD = MSG.slice(1).join(" ");
+  if (!Query) msg.reply("Please specify something for me to say!")
+  else
+  {
+    msg.channel.send(QueryD)
+}
+}
+    } catch (err) {
+        return console.log(err);
+    }
+});
+
+//SAY
+
 
 
 //GIF
