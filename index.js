@@ -41,6 +41,13 @@ client.on("messageCreate", msg => {
   }
 })
 
+client.on("messageCreate", msg => {
+  if (msg.content == "kas tas bija"){
+    msg.channel.send("https://media.discordapp.net/attachments/693907891563790377/916302830996946944/ezgif.com-gif-maker.gif")
+  }
+})
+
+
 //POLL
 
 client.on("messageCreate", async (msg) => {
