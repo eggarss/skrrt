@@ -35,6 +35,12 @@ client.on("messageCreate", msg => {
   }
 })
 
+client.on("messageCreate", msg => {
+  if (msg.content == "fakti"){
+    msg.channel.send("🇱 🇮 🇪 🇱 🇮    🇫 🇦 🇰 🇹 🇮")
+  }
+})
+
 //POLL
 
 client.on("messageCreate", async (msg) => {
