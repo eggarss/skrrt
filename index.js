@@ -5,7 +5,7 @@ const pagination = require('discord.js-pagination');
 const snekfetch = require('snekfetch');
 process.env.PORT || 3000;
 let prefix = '.';
-
+require('events').EventEmitter.defaultMaxListeners = 15;
 var express = require('express');
 var app = express();
 
@@ -36,15 +36,21 @@ client.on("messageCreate", msg => {
 })
 
 client.on("messageCreate", msg => {
-  if (msg.content == "fakti"){
+  if (msg.content == "fakti") {
     msg.channel.send("🇱 🇮 🇪 🇱 🇮    🇫 🇦 🇰 🇹 🇮")
   }
 })
 
 client.on("messageCreate", msg => {
-  if (msg.content == "kas tas bija"){
+  if (msg.content == "kas tas bija") {
     msg.channel.send("https://media.discordapp.net/attachments/693907891563790377/916302830996946944/ezgif.com-gif-maker.gif")
   }
+})
+
+client.on('guildMemberAdd', guildMember =>{
+   let welcomeRole = guildMember.guild.roles.cache.find(role => role.name === 'viesis');
+   guildMember.roles.add(welcomeRole); 
+   guildMember.guild.channels.resolve('784866801925619722').send(`Welcome ,@${guildMember.user.id}>`)
 })
 
 
@@ -55,20 +61,27 @@ client.on("messageCreate", async (msg) => {
     if (msg.author.bot || msg.channel.type === "dm") return;
     let query = msg.content.split(" ");
 
+    function isNumber(n) {
+      return !isNaN(parseFloat(n)) && !isNaN(n - 0);
+    }
+
     if (query[0] === '.poll') {
 
 
       let kkk = "Ievadi ziņu nakamreiz DAVNI";
-      if (query.length > 1) {
-        kkk = query.slice(1, query.length).join(" ");
+
+      if (query.length > 2) {
+        kkk = query.slice(2, query.length).join(" ");
       }
-      if (!query[1]) return msg.reply("Par ko balsot? :thinking:");
+      if (!query[1]) return msg.reply("Ievadi laiku!");
+      if (!query[2]) return msg.reply("Par ko balsot? :thinking:");
+
 
       const embedPoll = new Discord.MessageEmbed()
         .setTitle(`${msg.author.username}'s Poll!`)
-        .setDescription(`**Question:** ${kkk} \n **Voting time:** 30sec`)
+        .setDescription(`**Question:** ${kkk} \n **Voting time:** ${query[1]}`)
         .setTimestamp()
-        .setColor('RED')
+        .setColor('RANDOM')
       const qemb = await msg.channel.send({ embeds: [embedPoll] })
       qemb.react('👍');
       qemb.react('👎');
@@ -76,7 +89,7 @@ client.on("messageCreate", async (msg) => {
       const filter = (reaction, user) => {
         return reaction.emoji.name === '👍' || reaction.emoji.name === '👎';
       };
-      const results = await qemb.awaitReactions({ filter, time: 30000 })
+      const results = await qemb.awaitReactions({ filter, time: query[1]})
 
       const resultsEmbed = new Discord.MessageEmbed()
         .setTitle(`${qemb.author.username}'s Poll Results!`)
@@ -171,7 +184,7 @@ client.on("messageCreate", async (msg) => {
       return rand[Math.floor(Math.random() * rand.length)];
     }
 
-    if (command === 'dumb') {
+    if (command === 'stoopid') {
 
       const embedgif = new Discord.MessageEmbed()
         .setTitle("XDDDDDDDDDDDDDDDDDDDDDDDD")
@@ -312,7 +325,6 @@ client.on("messageCreate", async (msg) => {
     if (command === 'nsfw') {
       const { body } = await snekfetch
         .get(`https://www.reddit.com/r/${girls()}.json?sort=top&t=week`)
-        .query({ limit: 800 });
       const allowed = msg.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
       if (!allowed.length) return msg.channel.send('Restricted content!');
       const randomnumber = Math.floor(Math.random() * allowed.length)
@@ -325,9 +337,10 @@ client.on("messageCreate", async (msg) => {
       //.addField("Other info:", "Up votes: " + allowed[randomnumber].data.ups + " / //Comments: " + allowed[randomnumber].data.num_comments)
       //.setFooter({text:`NSFW provided by r/${girls()}`})
 
-      msg.guild.channels.cache.get("646362943063326720").send(/*{ embeds: [embed] }*/allowed[randomnumber].data.url);
-    }
+      //msg.guild.channels.cache.get("646362943063326720").send(/*{ embeds: [embed] }*/allowed[randomnumber].data.url);
 
+    }
+    msg.channel.send(allowed[randomnumber].data.url)
   } catch (err) {
     return console.log(err);
   }
