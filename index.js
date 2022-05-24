@@ -111,35 +111,6 @@ client.on("messageCreate", async (msg) => {
 
 //POLL
 
-
-
-//CLEAR
-client.on("messageCreate", async (msg) => {
-  try {
-
-    if (!msg.content.startsWith(prefix) || msg.author.bot) return;
-
-    const args = msg.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
-
-    if (command === 'clear') {
-
-      if (!args[0]) return msg.reply("Enter amount of messages you want to clear");
-      if (isNaN(args[0])) return msg.reply("Please enter a real number");
-
-      msg.channel.messages.fetch({ limit: args[0] }).then(msg => {
-        msg.channel.bulkDelete(messages);
-
-      })
-    }
-  }
-  catch (err) {
-    console.log(`Error in the main Functionality! ${err}`);
-    msg.react('❌');
-  }
-});
-//CLEAR
-
 //8BALL
 client.on("messageCreate", async (msg) => {
   try {
@@ -168,7 +139,7 @@ client.on("messageCreate", async (msg) => {
 });
 //8BALL
 
-//RETARD
+/*RETARD
 client.on("messageCreate", async (msg) => {
   try {
 
@@ -202,9 +173,9 @@ client.on("messageCreate", async (msg) => {
     msg.react('❌');
   }
 });
-//RETARD
+*///RETARD
 
-//SAY
+/*/SAY
 
 client.on("messageCreate", async (msg) => {
   try {
@@ -226,9 +197,9 @@ client.on("messageCreate", async (msg) => {
   }
 });
 
-//SAY
+*///SAY
 
-//MOCK
+/*/MOCK
 
 client.on("messageCreate", async (msg) => {
   try {
@@ -258,7 +229,7 @@ client.on("messageCreate", async (msg) => {
 
 });
 
-//MOCK
+*///MOCK
 
 //GIF
 client.on("messageCreate", async (msg) => {
@@ -308,7 +279,7 @@ client.on("messageCreate", async (msg) => {
 //GIPHY
 //GIF
 
-//NSFW REDDIT
+/*/NSFW REDDIT
 
 client.on("messageCreate", async (msg) => {
   try {
@@ -337,7 +308,7 @@ client.on("messageCreate", async (msg) => {
       //.addField("Other info:", "Up votes: " + allowed[randomnumber].data.ups + " / //Comments: " + allowed[randomnumber].data.num_comments)
       //.setFooter({text:`NSFW provided by r/${girls()}`})
 
-      //msg.guild.channels.cache.get("646362943063326720").send(/*{ embeds: [embed] }*/allowed[randomnumber].data.url);
+      //msg.guild.channels.cache.get("646362943063326720").send(/*{ embeds: [embed] }allowed[randomnumber].data.url);
 
     }
     msg.channel.send(allowed[randomnumber].data.url)
@@ -346,7 +317,7 @@ client.on("messageCreate", async (msg) => {
   }
 });
 
-//NSFW REDDIT
+*///NSFW REDDIT
 
 
 
