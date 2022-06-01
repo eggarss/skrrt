@@ -30,7 +30,7 @@ client.on("ready", () => {
 
 
 client.on("messageCreate", msg => {
-  if (msg.content == "gang") {
+  if (msg.content == "gaang") {
     msg.channel.send("shit")
   }
 })
