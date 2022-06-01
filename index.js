@@ -317,7 +317,7 @@ client.on("messageCreate", async (msg) => {
   }
 });
 
-*///NSFW REDDIT
+*/
 
 
 
