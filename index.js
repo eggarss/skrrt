@@ -199,37 +199,7 @@ client.on("messageCreate", async (msg) => {
 
 *///SAY
 
-/*/MOCK
 
-client.on("messageCreate", async (msg) => {
-  try {
-    if (!msg.content.startsWith(prefix) || msg.author.bot) return;
-    const args = msg.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
-
-    if (command === 'mock') {
-      let MSG = msg.content.split(" ");
-      let Query = MSG.slice(1).join("+");
-      let QueryD = MSG.slice(1).join(" ");
-      if (!Query) msg.reply("Please specify something for me to say!")
-      function firstLetterUppercase(QueryD) {
-        var res = "";
-        for (i = 0; i < QueryD.length; i++) {
-          res += i % 2 == 0 ? QueryD.charAt(i).toUpperCase() : QueryD.charAt(i);
-        }
-        return res;
-      }
-      msg.channel.send(firstLetterUppercase(QueryD))
-      //console.log(firstLetterUppercase(QueryD));
-    }
-  } catch (err) {
-    return console.log(err);
-
-  }
-
-});
-
-*///MOCK
 
 //GIF
 client.on("messageCreate", async (msg) => {
@@ -260,6 +230,64 @@ client.on("messageCreate", async (msg) => {
   }
 });
 
+//GIPHY
+/*client.on("messageCreate", async (msg) => {
+  try{
+    let query = msg.content.split(" ");
+    if(query[0] == ".gif") {
+       let url = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHYKEY}&q=${query[1]}`; 
+      let response = await fetch(url);
+      let jsn = await response.json();
+      let random = Math.floor(Math.random() * jsn.data.length);
+      msg.channel.send(jsn.data[random].url);
+    }}
+    catch(err){
+        console.log(`Neatrada tadu gifu! ${err}`);
+        msg.react('❌');
+    }
+});*/
+//GIPHY
+//GIF
+
+/*/NSFW REDDIT
+
+client.on("messageCreate", async (msg) => {
+  try {
+
+    if (!msg.content.startsWith(prefix) || msg.author.bot) return;
+    const args = msg.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    function girls() {
+      var rand = ['RealGirls', 'NSFW', 'BoltedOnTits', 'HighResNSFW', 'randomsexiness', 'ass', 'bigasses', 'SpreadEm', 'booty', 'thick', 'ShinyPorn', 'seethru', 'gonewild', 'Blonde', 'redheads', 'shorthairchicks', 'HappyEmbarrassedGirls', 'palegirls', 'SexyFrex', 'flexi', 'LegalTeens', 'theratio', 'milf', 'Hotchickswithtattoos', 'piercedtits', 'PiercedNSFW', 'pussy', 'rearpussy', 'HairyPussy', 'simps', 'selfshots', 'SexyGirlsInBoots', 'boobs', 'Boobies'];
+
+      return rand[Math.floor(Math.random() * rand.length)];
+    }
+    if (command === 'nsfw') {
+      const { body } = await snekfetch
+        .get(`https://www.reddit.com/r/${girls()}.json?sort=top&t=week`)
+      const allowed = msg.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
+      if (!allowed.length) return msg.channel.send('Restricted content!');
+      const randomnumber = Math.floor(Math.random() * allowed.length)
+
+      //const embed = new Discord.MessageEmbed()
+      //.setColor("RANDOM")
+      //.setTitle(allowed[randomnumber].data.title)
+      //.setDescription("Posted by: " + allowed[randomnumber].data.author)
+      //.setImage(allowed[randomnumber].data.url)
+      //.addField("Other info:", "Up votes: " + allowed[randomnumber].data.ups + " / //Comments: " + allowed[randomnumber].data.num_comments)
+      //.setFooter({text:`NSFW provided by r/${girls()}`})
+
+      //msg.guild.channels.cache.get("646362943063326720").send(/*{ embeds: [embed] }allowed[randomnumber].data.url);
+
+    }
+    msg.channel.send(allowed[randomnumber].data.url)
+  } catch (err) {
+    return console.log(err);
+  }
+});
+
+*/
 
 
 
