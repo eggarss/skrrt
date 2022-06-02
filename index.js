@@ -30,9 +30,11 @@ client.on("ready", () => {
 
 
 client.on("messageCreate", msg => {
-  if (msg.content == "gang") {
-    msg.channel.send("shit")
-  }
+   const args = msg.content.slice().split();
+    const command = args.shift().toLowerCase();
+  if (command === 'gang') {
+      msg.channel.send("shit")
+    }
 })
 
 client.on("messageCreate", msg => {
