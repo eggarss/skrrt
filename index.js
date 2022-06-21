@@ -69,33 +69,32 @@ client.on("messageCreate", async (msg) => {
 
     if (query[0] === '.poll') {
 
-
-      let kkk = "Ievadi ziņu nakamreiz DAVNI";
+      let text = "Ievadi ziņu nakamreiz DAVNI";
 
       if (query.length > 2) {
-        kkk = query.slice(2, query.length).join(" ");
+        text = query.slice(2, query.length).join(" ");
       }
-      if (!query[1]) return msg.reply("Ievadi laiku!");
+      if (!Number(query[1])) return msg.reply("Ievadi laiku!");
       if (!query[2]) return msg.reply("Par ko balsot? :thinking:");
 
 
       const embedPoll = new Discord.MessageEmbed()
         .setTitle(`${msg.author.username}'s Poll!`)
-        .setDescription(`**Question:** ${kkk} \n **Voting time:** ${query[1]}`)
+        .setDescription(`**Question:** ${text} \n **Voting time:** ${Number(query[1])}`)
         .setTimestamp()
         .setColor('RANDOM')
       const qemb = await msg.channel.send({ embeds: [embedPoll] })
       qemb.react('👍');
       qemb.react('👎');
 
-      const filter = (reaction, user) => {
+      const filter = (reaction) => {
         return reaction.emoji.name === '👍' || reaction.emoji.name === '👎';
       };
-      const results = await qemb.awaitReactions({ filter, time: query[1]})
+      const results = await qemb.awaitReactions({ filter, time:Number(query[1])})
 
       const resultsEmbed = new Discord.MessageEmbed()
         .setTitle(`${qemb.author.username}'s Poll Results!`)
-        .setDescription(`**Results for the question:** ${kkk}`)
+        .setDescription(`**Results for the question:** ${text}`)
         .addField("👍:", `${results.get("👍").count - 1} Votes`)
         .addField('👎:', `${results.get("👎").count - 1} Votes`)
       //.then(collected => console.log(`Collected ${collected.size} reactions`))
