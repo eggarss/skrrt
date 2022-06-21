@@ -63,9 +63,6 @@ client.on("messageCreate", async (msg) => {
     if (msg.author.bot || msg.channel.type === "dm") return;
     let query = msg.content.split(" ");
 
-    function isNumber(n) {
-      return !isNaN(parseFloat(n)) && !isNaN(n - 0);
-    }
 
     if (query[0] === '.poll') {
 
@@ -74,13 +71,14 @@ client.on("messageCreate", async (msg) => {
       if (query.length > 2) {
         text = query.slice(2, query.length).join(" ");
       }
-      if (!Number(query[1])) return msg.reply("Ievadi laiku!");
-      if (!query[2]) return msg.reply("Par ko balsot? :thinking:");
+      if (!Number(query[1])) return msg.reply("Input format [ ***.poll <seconds> <text>*** ]")
+      else if (Number(query[1]) < 0) return msg.reply("Enter valid number");
+      if (!query[2]) return msg.reply("Input format [ **.poll <seconds> <text>** ]");
 
 
       const embedPoll = new Discord.MessageEmbed()
         .setTitle(`${msg.author.username}'s Poll!`)
-        .setDescription(`**Question:** ${text} \n **Voting time:** ${Number(query[1])}`)
+        .setDescription(`**Question:** ${text} \n **Voting time:** ${Number(query[1])}sec`)
         .setTimestamp()
         .setColor('RANDOM')
       const qemb = await msg.channel.send({ embeds: [embedPoll] })
@@ -90,7 +88,7 @@ client.on("messageCreate", async (msg) => {
       const filter = (reaction) => {
         return reaction.emoji.name === '👍' || reaction.emoji.name === '👎';
       };
-      const results = await qemb.awaitReactions({ filter, time:Number(query[1])})
+      const results = await qemb.awaitReactions({ filter, time:Number(query[1] * 1000)})
 
       const resultsEmbed = new Discord.MessageEmbed()
         .setTitle(`${qemb.author.username}'s Poll Results!`)
@@ -106,7 +104,6 @@ client.on("messageCreate", async (msg) => {
   }
   catch (err) {
     console.log(`Error in the main Functionality! ${err}`);
-    msg.react('❌');
   }
 });
 
