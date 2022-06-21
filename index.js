@@ -72,7 +72,7 @@ client.on("messageCreate", async (msg) => {
         text = query.slice(2, query.length).join(" ");
       }
       if (!Number(query[1])) return msg.reply("Input format [ ***.poll <seconds> <text>*** ]")
-      else if (Number(query[1]) < 0) return msg.reply("Enter valid number");
+      else if (Number(query[1]) < 5) return msg.reply("Minimal value is 5");
       if (!query[2]) return msg.reply("Input format [ **.poll <seconds> <text>** ]");
 
 
