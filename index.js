@@ -55,6 +55,51 @@ client.on('guildMemberAdd', guildMember =>{
    guildMember.guild.channels.resolve('784866801925619722').send(`Welcome ,@${guildMember.user.id}>`)
 })
 
+//Reminder
+
+client.on("messageCreate", async (msg) => {
+  try {
+    if (msg.author.bot || msg.channel.type === "dm") return;
+    let query = msg.content.split(" ");
+
+
+    if (query[0] === '.remind') {
+
+      let text = "Ievadi ziņu nakamreiz DAVNI";
+
+      if (query.length > 2) {
+        text = query.slice(2, query.length).join(" ");
+      }
+      if (!Number(query[1])) return msg.reply("Input format [ **.remind <minutes> <text>** ]")
+      else if (Number(query[1]) < 1) return msg.reply("Minimum value is 1");
+      if (!query[2]) return msg.reply("Input format [ **.remind <minutes> <text>** ]");
+
+
+      const embedPoll = new Discord.MessageEmbed()
+        .setTitle(`${msg.author.username}'s Reminder!`)
+        .setDescription(`**Text** ${text} \n  **Time** ${Number(query[1])}min`)
+        .setTimestamp()
+        .setColor('RANDOM')
+      const qemb = await msg.channel.send({ embeds: [embedPoll] })
+
+      const results = await qemb.awaitReactions({ time:Number(query[1] * 1000 * 60)})
+
+      const resultsEmbed = new Discord.MessageEmbed()
+        .setTitle(`${qemb.author.username}'s Results!`)
+        .setDescription(`${text}`)        
+      //.then(collected => console.log(`Collected ${collected.size} reactions`))
+      //.catch(console.error);
+
+
+      msg.channel.send({ embeds: [resultsEmbed] });
+    }
+  }
+  catch (err) {
+    console.log(`Error in the main Functionality! ${err}`);
+  }
+});
+
+//Reminder
 
 //POLL
 
