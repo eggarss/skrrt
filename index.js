@@ -77,7 +77,7 @@ client.on("messageCreate", async (msg) => {
 
       const embedPoll = new Discord.MessageEmbed()
         .setTitle(`${msg.author.username}'s Reminder!`)
-        .setDescription(`**Text** ${text} \n  **Time** ${Number(query[1])}min`)
+        .setDescription(`**Text:** ${text} \n  **Time:** ${Number(query[1])}min`)
         .setTimestamp()
         .setColor('RANDOM')
       const qemb = await msg.channel.send({ embeds: [embedPoll] })
