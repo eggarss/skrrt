@@ -92,7 +92,7 @@ client.on("messageCreate", async (msg) => {
 
       const resultsEmbed = new Discord.MessageEmbed()
         .setTitle(`${qemb.author.username}'s Poll Results!`)
-        .setDescription(`**Results for the question:** ${text}`)
+        .setDescription(`**Results for the question:** ${text}`)        
         .addField("👍:", `${results.get("👍").count - 1} Votes`)
         .addField('👎:', `${results.get("👎").count - 1} Votes`)
       //.then(collected => console.log(`Collected ${collected.size} reactions`))
