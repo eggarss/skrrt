@@ -76,17 +76,18 @@ client.on("messageCreate", async (msg) => {
 
 
       const embedPoll = new Discord.MessageEmbed()
-        .setTitle(`${msg.author.username}'s Reminder!`)
-        .setDescription(`**Text:** ${text} \n  **Time:** ${Number(query[1])}min`)
+        .setDescription(`Will remind you about **${text}** in **${Number(query[1])}** minutes`)
         .setTimestamp()
         .setColor('RANDOM')
       const qemb = await msg.channel.send({ embeds: [embedPoll] })
 
-      const results = await qemb.awaitReactions({ time:Number(query[1] * 1000 * 60)})
+      const results = await qemb.awaitReactions({ time:Number(query[1]) * 1000 * 60})
 
       const resultsEmbed = new Discord.MessageEmbed()
-        .setTitle(`${qemb.author.username}'s Results!`)
-        .setDescription(`${text}`)        
+        .setTitle('Reminder')
+	      .setURL(msg.url) 
+        .setDescription(`${text}`)     
+      
       //.then(collected => console.log(`Collected ${collected.size} reactions`))
       //.catch(console.error);
 
