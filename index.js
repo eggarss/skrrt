@@ -72,6 +72,7 @@ client.on("messageCreate", async (msg) => {
       }
       if (!Number(query[1])) return msg.reply("Input format [ **.remind <minutes> <text>** ]")
       else if (Number(query[1]) < 1) return msg.reply("Minimum value is 1");
+      else if (Number(query[1]) > 525948) return msg.reply("Enter valid number");
       if (!query[2]) return msg.reply("Input format [ **.remind <minutes> <text>** ]");
 
 
@@ -83,6 +84,7 @@ client.on("messageCreate", async (msg) => {
 
       const results = await qemb.awaitReactions({ time:Number(query[1]) * 1000 * 60})
 
+      
       const resultsEmbed = new Discord.MessageEmbed()
         .setTitle('Reminder')
 	      .setURL(msg.url) 
@@ -90,9 +92,10 @@ client.on("messageCreate", async (msg) => {
       
       //.then(collected => console.log(`Collected ${collected.size} reactions`))
       //.catch(console.error);
-
-
-      msg.channel.send({ embeds: [resultsEmbed] });
+      
+      //msg.channel.send('${msg.author}',{ embeds: [resultsEmbed] });
+      msg.channel.send({content: `${msg.author}`, embeds: [resultsEmbed],
+});
     }
   }
   catch (err) {
