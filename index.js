@@ -84,7 +84,7 @@ client.on("messageCreate", async (msg) => {
 
       const results = await qemb.awaitReactions({ time:Number(query[1]) * 1000 * 60})
 
-      
+     
       const resultsEmbed = new Discord.MessageEmbed()
         .setTitle('Reminder')
 	      .setURL(msg.url) 
