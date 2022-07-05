@@ -38,6 +38,14 @@ client.on("messageCreate", msg => {
 })
 
 client.on("messageCreate", msg => {
+   const args = msg.content.slice().split();
+    const command = args.shift().toLowerCase();
+  if (command === 'ucc') {
+      msg.channel.send("nahuj")
+    }
+})
+
+client.on("messageCreate", msg => {
   if (msg.content == "fakti") {
     msg.channel.send("🇱 🇮 🇪 🇱 🇮    🇫 🇦 🇰 🇹 🇮")
   }
