@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"], })
-const fetch = require("node-fetch");
+//const fetch = require("node-fetch");
 const pagination = require('discord.js-pagination');
 const snekfetch = require('snekfetch');
 process.env.PORT || 3000;
@@ -276,7 +276,7 @@ client.on("messageCreate", async (msg) => {
       const gifcmd = new Discord.MessageEmbed()
         .setColor('RANDOM')
         .setImage(gif.url)
-      msg.channel.send({ embeds: [gifcmd] })
+      msg.channel.send({ embeds: [gifcmd]})
 
     }
   }
