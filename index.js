@@ -188,7 +188,7 @@ client.on("messageCreate", async (msg) => {
     }
   }
   catch (err) {
-    console.log(`Error in the main Functionality! ${err}`);
+    console.log(`Error in the main Functionality!! ${err}`);
     msg.react('❌');
   }
 });
