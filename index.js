@@ -44,6 +44,12 @@ client.on("messageCreate", msg => {
 })
 
 client.on("messageCreate", msg => {
+  if (msg.content == "ko tu") {
+    msg.channel.send("es jau tur")
+  }
+})
+
+client.on("messageCreate", msg => {
   if (msg.content == "kas tas bija") {
     msg.channel.send("https://media.discordapp.net/attachments/693907891563790377/916302830996946944/ezgif.com-gif-maker.gif")
   }
