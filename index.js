@@ -38,14 +38,6 @@ client.on("messageCreate", msg => {
 })
 
 client.on("messageCreate", msg => {
-   const args = msg.content.slice().split();
-    const command = args.shift().toLowerCase();
-  if (command === 'ucc') {
-      msg.channel.send("nahuj")
-    }
-})
-
-client.on("messageCreate", msg => {
   if (msg.content == "fakti") {
     msg.channel.send("🇱 🇮 🇪 🇱 🇮    🇫 🇦 🇰 🇹 🇮")
   }
@@ -257,21 +249,20 @@ client.on("messageCreate", async (msg) => {
 
 
 //GIF
-/*
 client.on("messageCreate", async (msg) => {
   try {
     let query = msg.content.split(" ");
     if (query[0] == ".gif") {
-      let meme = "meme";
+      let meme = "dark meme";
       if (query.length > 1) {
         meme = query.slice(1, query.length).join(" ");
       }
-      let url = `https://api.tenor.com/v1/search?q=${meme}&key=${process.env.TENORKEY}`;
+      let url = `https://api.tenor.com/v1/search?q=${meme}&key=${process.env.TENORKEY}"`;
       let response = await fetch(url);
       let { results } = await response.json();
       let random = results[Math.floor(Math.random() * results.length)];
       let { gif } = random.media[0]; //parverš linku par media kas ļauj ievietot embeda
-      msg.channel.send(random);
+      //msg.channel.send(data.results[random].url);
 
       const gifcmd = new Discord.MessageEmbed()
         .setColor('RANDOM')
@@ -285,7 +276,7 @@ client.on("messageCreate", async (msg) => {
     msg.react('❌');
   }
 });
-*/
+
 //GIPHY
 /*client.on("messageCreate", async (msg) => {
   try{
