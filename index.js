@@ -1,5 +1,5 @@
-const Discord = require("discord.js")
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"], })
+//const Discord = require("discord.js")
+//const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"], })
 const fetch = require("node-fetch");
 const pagination = require('discord.js-pagination');
 const snekfetch = require('snekfetch');
@@ -20,7 +20,24 @@ app.get('/', function(request, response) {
 });
 //For avoidong Heroku $PORT error
 
-client.login(process.env.TOKEN);
+const { Client, Intents } = require('discord.js');
+    require("dotenv").config();
+    const client = new Client({intents:[Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });                                         
+    const mySecret = process.env['TOKEN'];
+     client.on("ready", () => {
+     console.log(`Logged is as ${client.user.tag}!`);
+    });
+
+
+   client.on("message", (msg) => {
+    if(msg.content === "ping"){
+    msg.reply("pong");
+   }
+   });
+
+   client.login(mySecret);
+
+//client.login(process.env.TOKEN);
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`)
@@ -38,14 +55,16 @@ client.on("messageCreate", msg => {
 })
 
 client.on("messageCreate", msg => {
-  if (msg.content == "fakti") {
-    msg.channel.send("🇱 🇮 🇪 🇱 🇮    🇫 🇦 🇰 🇹 🇮")
-  }
+   const args = msg.content.slice().split();
+    const command = args.shift().toLowerCase();
+  if (command === 'ucc') {
+      msg.channel.send("nahuj")
+    }
 })
 
 client.on("messageCreate", msg => {
-  if (msg.content == "ko tu") {
-    msg.channel.send("es jau tur")
+  if (msg.content == "fakti") {
+    msg.channel.send("🇱 🇮 🇪 🇱 🇮    🇫 🇦 🇰 🇹 🇮")
   }
 })
 
@@ -255,20 +274,21 @@ client.on("messageCreate", async (msg) => {
 
 
 //GIF
+/*
 client.on("messageCreate", async (msg) => {
   try {
     let query = msg.content.split(" ");
     if (query[0] == ".gif") {
-      let meme = "dark meme";
+      let meme = "meme";
       if (query.length > 1) {
         meme = query.slice(1, query.length).join(" ");
       }
-      let url = `https://api.tenor.com/v1/search?q=${meme}&key=${process.env.TENORKEY}"`;
+      let url = `https://api.tenor.com/v1/search?q=${meme}&key=${process.env.TENORKEY}`;
       let response = await fetch(url);
       let { results } = await response.json();
       let random = results[Math.floor(Math.random() * results.length)];
       let { gif } = random.media[0]; //parverš linku par media kas ļauj ievietot embeda
-      //msg.channel.send(data.results[random].url);
+      msg.channel.send(random);
 
       const gifcmd = new Discord.MessageEmbed()
         .setColor('RANDOM')
@@ -282,7 +302,7 @@ client.on("messageCreate", async (msg) => {
     msg.react('❌');
   }
 });
-
+*/
 //GIPHY
 /*client.on("messageCreate", async (msg) => {
   try{
