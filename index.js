@@ -1,5 +1,5 @@
-//const Discord = require("discord.js")
-//const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"], })
+const Discord = require("discord.js")
+const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"], })
 const fetch = require("node-fetch");
 const pagination = require('discord.js-pagination');
 const snekfetch = require('snekfetch');
@@ -20,24 +20,7 @@ app.get('/', function(request, response) {
 });
 //For avoidong Heroku $PORT error
 
-const { Client, Intents } = require('discord.js');
-    require("dotenv").config();
-    const client = new Client({intents:[Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });                                         
-    const mySecret = process.env['TOKEN'];
-     client.on("ready", () => {
-     console.log(`Logged is as ${client.user.tag}!`);
-    });
-
-
-   client.on("message", (msg) => {
-    if(msg.content === "ping"){
-    msg.reply("pong");
-   }
-   });
-
-   client.login(mySecret);
-
-//client.login(process.env.TOKEN);
+client.login(process.env.TOKEN);
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`)
