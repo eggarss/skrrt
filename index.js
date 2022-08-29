@@ -216,7 +216,7 @@ client.on("messageCreate", async (msg) => {
         .setTitle("XDDDDDDDDDDDDDDDDDDDDDDDD")
         .setColor('RANDOM')
         .setImage(retard())
-      const qemb = await msg.channel.send({ embeds: [embedgif] })
+      msg.channel.send({ embeds: [embedgif] })
 
 
 
