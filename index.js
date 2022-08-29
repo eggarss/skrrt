@@ -194,7 +194,7 @@ client.on("messageCreate", async (msg) => {
 });
 //8BALL
 
-/*RETARD
+//RETARD
 client.on("messageCreate", async (msg) => {
   try {
 
@@ -228,7 +228,7 @@ client.on("messageCreate", async (msg) => {
     msg.react('❌');
   }
 });
-*///RETARD
+///RETARD
 
 /*/SAY
 
@@ -257,7 +257,7 @@ client.on("messageCreate", async (msg) => {
 
 
 //GIF
-/*
+
 client.on("messageCreate", async (msg) => {
   try {
     let query = msg.content.split(" ");
@@ -285,7 +285,7 @@ client.on("messageCreate", async (msg) => {
     msg.react('❌');
   }
 });
-*/
+
 //GIPHY
 /*client.on("messageCreate", async (msg) => {
   try{
@@ -305,7 +305,7 @@ client.on("messageCreate", async (msg) => {
 //GIPHY
 //GIF
 
-/*/NSFW REDDIT
+//NSFW REDDIT
 
 client.on("messageCreate", async (msg) => {
   try {
@@ -342,8 +342,6 @@ client.on("messageCreate", async (msg) => {
     return console.log(err);
   }
 });
-
-*/
 
 
 
