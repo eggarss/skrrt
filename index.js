@@ -307,7 +307,7 @@ client.on("messageCreate", async (msg) => {
 //GIF
 
 //NSFW REDDIT
-/*
+
 client.on("messageCreate", async (msg) => {
   try {
 
@@ -342,7 +342,7 @@ client.on("messageCreate", async (msg) => {
   }catch (err) {
     return console.log(err);
   }
-});*/
+});
 
 
 
