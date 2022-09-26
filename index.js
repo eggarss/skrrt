@@ -316,7 +316,7 @@ client.on("messageCreate", async (msg) => {
     const command = args.shift().toLowerCase();
 
     function girls() {
-      var rand = ['RealGirls', 'NSFW', 'BoltedOnTits', 'HighResNSFW', 'randomsexiness', 'ass', 'bigasses', 'SpreadEm', 'booty', 'thick', 'ShinyPorn', 'seethru', 'gonewild', 'Blonde', 'redheads', 'shorthairchicks', 'HappyEmbarrassedGirls', 'palegirls', 'SexyFrex', 'flexi', 'LegalTeens', 'theratio', 'milf', 'Hotchickswithtattoos', 'piercedtits', 'PiercedNSFW', 'pussy', 'rearpussy', 'HairyPussy', 'simps', 'selfshots', 'SexyGirlsInBoots', 'boobs', 'Boobies'];
+      var rand = ['RealGirls', 'NSFW', 'BoltedOnTits', 'HighResNSFW', 'randomsexiness', 'ass', 'bigasses', 'SpreadEm', 'booty', 'thick', 'ShinyPorn', 'seethru', 'gonewild', 'Blonde', 'redheads', 'shorthairchicks', 'HappyEmbarrassedGirls', 'palegirls', 'SexyFrex', 'flexi', 'LegalTeens', 'theratio', 'milf', 'Hotchickswithtattoos', 'piercedtits', 'PiercedNSFW', 'pussy'];
 
       return rand[Math.floor(Math.random() * rand.length)];
     }
@@ -327,18 +327,18 @@ client.on("messageCreate", async (msg) => {
       if (!allowed.length) return msg.channel.send('Restricted content!');
       const randomnumber = Math.floor(Math.random() * allowed.length)
 
-      //const embed = new Discord.MessageEmbed()
-      //.setColor("RANDOM")
-      //.setTitle(allowed[randomnumber].data.title)
-      //.setDescription("Posted by: " + allowed[randomnumber].data.author)
-      //.setImage(allowed[randomnumber].data.url)
-      //.addField("Other info:", "Up votes: " + allowed[randomnumber].data.ups + " / //Comments: " + allowed[randomnumber].data.num_comments)
-      //.setFooter({text:`NSFW provided by r/${girls()}`})
+      const embed = new Discord.MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle(allowed[randomnumber].data.title)
+      .setDescription("Posted by: " + allowed[randomnumber].data.author)
+      .setImage(allowed[randomnumber].data.url)
+      .addField("Other info:", "Up votes: " + allowed[randomnumber].data.ups + " / //Comments: " + allowed[randomnumber].data.num_comments)
+      .setFooter({text:`NSFW provided by r/${girls()}`})
 
-      //msg.guild.channels.cache.get("646362943063326720").send(/*{ embeds: [embed] }allowed[randomnumber].data.url);
+      msg.guild.channels.cache.get("646362943063326720").send({ embeds: [embed]});
 
     }
-    msg.channel.send([randomnumber].data.url)
+    
   }catch (err) {
     return console.log(err);
   }
