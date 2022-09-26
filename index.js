@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const fetch = require('node-fetch');
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"], })
 //const fetch = require("node-fetch");
 const pagination = require('discord.js-pagination');
@@ -8,6 +9,7 @@ let prefix = '.';
 require('events').EventEmitter.defaultMaxListeners = 15;
 var express = require('express');
 var app = express();
+
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -189,7 +191,7 @@ client.on("messageCreate", async (msg) => {
   }
   catch (err) {
     console.log(`Error in the main Functionality! ${err}`);
-    msg.react('❌');
+    //msg.react('❌');
   }
 });
 //8BALL
@@ -225,7 +227,7 @@ client.on("messageCreate", async (msg) => {
   }
   catch (err) {
     console.log(`Error in the main Functionality! ${err}`);
-    msg.react('❌');
+    //msg.react('❌');
   }
 });
 ///RETARD
@@ -271,7 +273,7 @@ client.on("messageCreate", async (msg) => {
       let { results } = await response.json();
       let random = results[Math.floor(Math.random() * results.length)];
       let { gif } = random.media[0]; //parverš linku par media kas ļauj ievietot embeda
-      msg.channel.send(random);
+     // msg.channel.send(random);
 
       const gifcmd = new Discord.MessageEmbed()
         .setColor('RANDOM')
@@ -282,7 +284,6 @@ client.on("messageCreate", async (msg) => {
   }
   catch (err) {
     console.log(`Error in the main Functionality! ${err}`);
-    msg.react('❌');
   }
 });
 
@@ -306,7 +307,7 @@ client.on("messageCreate", async (msg) => {
 //GIF
 
 //NSFW REDDIT
-
+/*
 client.on("messageCreate", async (msg) => {
   try {
 
@@ -337,11 +338,11 @@ client.on("messageCreate", async (msg) => {
       //msg.guild.channels.cache.get("646362943063326720").send(/*{ embeds: [embed] }allowed[randomnumber].data.url);
 
     }
-    msg.channel.send(allowed[randomnumber].data.url)
-  } catch (err) {
+    msg.channel.send([randomnumber].data.url)
+  }catch (err) {
     return console.log(err);
   }
-});
+});*/
 
 
 
