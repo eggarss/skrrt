@@ -191,7 +191,7 @@ client.on("messageCreate", async (msg) => {
   }
   catch (err) {
     console.log(`Error in the main Functionality! ${err}`);
-    //msg.react('❌');
+    msg.react('❌');
   }
 });
 //8BALL
@@ -227,7 +227,7 @@ client.on("messageCreate", async (msg) => {
   }
   catch (err) {
     console.log(`Error in the main Functionality! ${err}`);
-    //msg.react('❌');
+    msg.react('❌');
   }
 });
 ///RETARD
