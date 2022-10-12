@@ -39,6 +39,9 @@ client.on("messageCreate", msg => {
     }
 })
 
+
+
+
 client.on("messageCreate", msg => {
    const args = msg.content.slice().split();
     const command = args.shift().toLowerCase();
@@ -56,6 +59,12 @@ client.on("messageCreate", msg => {
 client.on("messageCreate", msg => {
   if (msg.content == "kas tas bija") {
     msg.channel.send("https://media.discordapp.net/attachments/693907891563790377/916302830996946944/ezgif.com-gif-maker.gif")
+  }
+})
+
+client.on("messageCreate", msg => {
+  if (msg.content == "slap") {
+    msg.channel.send("https://media.giphy.com/media/UWEDYsbeVCHFCYwUsC/giphy.gif")
   }
 })
 
@@ -316,13 +325,14 @@ client.on("messageCreate", async (msg) => {
     const command = args.shift().toLowerCase();
 
     function girls() {
-      var rand = ['RealGirls', 'NSFW', 'BoltedOnTits', 'HighResNSFW', 'randomsexiness', 'ass', 'bigasses', 'SpreadEm', 'booty', 'thick', 'ShinyPorn', 'seethru', 'gonewild', 'Blonde', 'redheads', 'shorthairchicks', 'HappyEmbarrassedGirls', 'palegirls', 'SexyFrex', 'flexi', 'LegalTeens', 'theratio', 'milf', 'Hotchickswithtattoos', 'piercedtits', 'PiercedNSFW', 'pussy'];
+      var rand = [];
 
       return rand[Math.floor(Math.random() * rand.length)];
     }
     if (command === 'nsfw') {
       const { body } = await snekfetch
-        .get(`https://www.reddit.com/r/${girls()}.json?sort=top&t=week`)
+        .get(`http://www.reddit.com/r/${girls()}.json?sort=top&t=week`)
+      
       const allowed = msg.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
       if (!allowed.length) return msg.channel.send('Restricted content!');
       const randomnumber = Math.floor(Math.random() * allowed.length)
@@ -334,8 +344,9 @@ client.on("messageCreate", async (msg) => {
       .setImage(allowed[randomnumber].data.url)
       .addField("Other info:", "Up votes: " + allowed[randomnumber].data.ups + " / //Comments: " + allowed[randomnumber].data.num_comments)
       .setFooter({text:`NSFW provided by r/${girls()}`})
-
-      msg.guild.channels.cache.get("646362943063326720").send({ embeds: [embed]});
+      
+      msg.channel.send(randomnumber)
+      msg.guild.channels.cache.send({ embeds: [embed]});
 
     }
     
