@@ -29,7 +29,7 @@ client.on("ready", () => {
   client.user.setActivity("with Dick", { type: "PLAYING" })
 })
 
-
+/////////////////////////
 
 client.on("messageCreate", msg => {
    const args = msg.content.slice().split();
@@ -73,6 +73,36 @@ client.on('guildMemberAdd', guildMember =>{
    guildMember.roles.add(welcomeRole); 
    guildMember.guild.channels.resolve('784866801925619722').send(`Welcome ,@${guildMember.user.id}>`)
 })
+
+
+/*client.on("messageCreate", async (msg) => {
+  try {
+    if (!msg.content.startsWith(prefix) || msg.author.bot) return;
+    const args = msg.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+
+   if (command === 'mock') {
+
+     var str = ""
+     var res = str.toLowerCase();
+       result_string = ""
+    index = 0;
+    for (c in msg){
+      if(index%2 == 0){
+        result_string += c.toLowerCase()
+      } else {
+        result_string += c.toUperCase()
+        index+=1
+        
+      }
+    }
+      }
+     msg.channel.send(res)
+    }
+   catch (err) {
+    return console.log(err);
+  }
+});*/
 
 //Reminder
 
@@ -241,7 +271,7 @@ client.on("messageCreate", async (msg) => {
 });
 ///RETARD
 
-/*/SAY
+//SAY
 
 client.on("messageCreate", async (msg) => {
   try {
@@ -263,7 +293,7 @@ client.on("messageCreate", async (msg) => {
   }
 });
 
-*///SAY
+///SAY
 
 
 
@@ -355,7 +385,7 @@ client.on("messageCreate", async (msg) => {
   }
 });
 
-
+//
 
 
 
